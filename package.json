@@ -1,0 +1,10 @@
+{
+  "name": "codemods",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Per Jansson <per.r.jansson@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "path": "^0.12.7"
+  }
+}
