@@ -1,56 +1,61 @@
 import React from 'react'
 
-var Car = ({ value, onClick }) => <div onClick={onClick}>{value}</div>
+class Car extends Component {
+  render() {
+    return <div onClick={onClick}>{value}</div>;
+  }
+}
 
-var CarList = React.createClass({
-  getInitialState: function() {
-    return {
-      cars: [
-        'Volvo',
-        'Saab',
-        'BMW',
-        'Tesla',
-        'Mercedes',
-        'Fiat',
-        'Renault',
-        'Lada',
-        'Opel'
-      ],
-      selectedCar: null,
-      history: null
-    }
-  },
+class CarList extends React.Component {
+  state = {
+    cars: [
+      'Volvo',
+      'Saab',
+      'BMW',
+      'Tesla',
+      'Mercedes',
+      'Fiat',
+      'Renault',
+      'Lada',
+      'Opel',
+    ],
+    selectedCar: null,
+    history: null
+  };
 
-  setSelectedCar: function(selectedCar) {
+  setSelectedCar = (selectedCar) => {
     this.setState(state => ({
-      selectedCar: selectedCar,
-      history: Object.assign({}, state.history, selectedCar.id)
+      selectedCar,
+      history: {
+        ...state.history,
+        ...selectedCar.id
+      }
     }))
-  },
+  };
 
-  renderCars: function() {
-    var cars = this.cars.map(car => (
+  renderCars = () => {
+    const cars = this.cars.map(car => (
       <Car
         value={car}
-        onClick={function(e) {
+        onClick={e => {
           this.setSelectedCar(e.target.value)
-        }.bind(this)}
+        }}
       />
-    ))
+    ));
 
     return cars
-  },
+  };
 
-  renderBestCarMessage: function() {
-    var message = 'No cars'
+  renderBestCarMessage = () => {
+    let message = 'No cars';
     if (cars.length) {
-      var randomCar = null
-      message = 'The best car is ' + randomCar
+      const randomCar = null;
+      message = `The best car is ${randomCar}`
     }
     return message
-  },
+  };
 
-  render: function() {
+  render() {
     return (
       <div>
         {this.renderCars()}
@@ -58,6 +63,6 @@ var CarList = React.createClass({
       </div>
     )
   }
-})
+}
 
 export default CarList
